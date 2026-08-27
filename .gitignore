@@ -1,0 +1,8 @@
+.vercel
+/node_modules
+/.next
+/next-env.d.ts
+/tsconfig.tsbuildinfo
+
+# macOS がフォルダを開くたびに作る隠しファイル
+.DS_Store
