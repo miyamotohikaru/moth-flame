@@ -17,6 +17,7 @@
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "postcss": "^8.5.8",
+    "puppeteer-core": "^25.10.0",
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.2"
   }

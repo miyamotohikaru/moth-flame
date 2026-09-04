@@ -1,0 +1,107 @@
+<!doctype html>
+<!--
+  共有時に出る絵（1200×630）の版下。
+  背景は tools/shoot-og.mjs が撮った実際のゲーム画面（焚き火＋一周描いた円）。
+  ここを直したら node tools/shoot-og.mjs で public/og.png を焼き直す。
+-->
+<html lang="ja">
+<meta charset="utf-8">
+<title>OG版下</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #222; }
+
+  #og {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #0e0d1a;
+  }
+
+  /* 撮ってきたゲーム画面（1800×900）。焚き火が右寄りに来るようずらして敷く */
+  .scene {
+    position: absolute;
+    width: 1800px;
+    height: 900px;
+    image-rendering: pixelated;
+  }
+
+  /* 左側は文字を置くので、夜を少し濃くして読めるようにする */
+  .veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(14, 13, 26, 0.94) 0%,
+      rgba(14, 13, 26, 0.9) 32%,
+      rgba(14, 13, 26, 0.62) 47%,
+      rgba(14, 13, 26, 0) 60%
+    );
+  }
+
+  .txt {
+    position: absolute;
+    left: 72px;
+    top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .kick {
+    font-family: "Press Start 2P", monospace;
+    font-size: 16px;
+    color: #ffb454;
+    letter-spacing: 5px;
+    text-shadow: 2px 2px 0 #0e0d1a;
+    margin-bottom: 24px;
+  }
+  .ttl {
+    font-family: "Press Start 2P", monospace;
+    font-size: 56px;
+    color: #fff7c2;
+    line-height: 1.38;
+    text-shadow: 4px 4px 0 #0e0d1a;
+    margin-bottom: 34px;
+  }
+  .lead {
+    font-family: "DotGothic16", monospace;
+    font-size: 26px;
+    color: rgba(255, 247, 194, 0.86);
+    line-height: 1.75;
+    text-shadow: 2px 2px 0 #0e0d1a;
+  }
+  .url {
+    position: absolute;
+    left: 76px;
+    bottom: 44px;
+    font-family: "VT323", monospace;
+    font-size: 26px;
+    color: #8be9fd;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 0 #0e0d1a;
+  }
+</style>
+<div id="og">
+  <img class="scene" alt="">
+  <div class="veil"></div>
+  <div class="txt">
+    <div class="kick">MOTH &amp; FLAME</div>
+    <div class="ttl">DRAW A<br>CIRCLE</div>
+    <div class="lead">ドット絵の焚き火の周りを蛾になって飛び回れ。<br>完璧な円を描いてスコアを競おう。</div>
+  </div>
+  <div class="url">moth-flame.kosukuma.com</div>
+</div>
+<script>
+  // 背景の位置は shoot-og.mjs が測った焚き火の位置から決まる
+  const q = new URLSearchParams(location.search);
+  const scene = document.querySelector(".scene");
+  scene.style.left = (q.get("left") ?? -42) + "px";
+  scene.style.top = (q.get("top") ?? -142) + "px";
+  scene.src = q.get("scene") ?? "og-scene.png";
+</script>
+</html>
