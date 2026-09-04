@@ -1,10 +1,33 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const TITLE = "Moth Flame — FLAME.EXE";
+const DESCRIPTION =
+  "ドット絵の焚き火の周りを蛾になって飛び回れ。完璧な円を描いてスコアを競おう。";
+
 export const metadata: Metadata = {
-  title: "Moth Flame — FLAME.EXE",
-  description:
-    "ドット絵の焚き火の周りを蛾になって飛び回れ。完璧な円を描いてスコアを競おう。",
+  metadataBase: new URL("https://moth-flame.kosukuma.com"),
+  title: TITLE,
+  description: DESCRIPTION,
+  // 共有したときに出る絵。実際のゲーム画面を撮ったもので、
+  // 焼き直しは node tools/shoot-og.mjs（版下は tools/og.html）。
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "https://moth-flame.kosukuma.com",
+    siteName: "Moth Flame",
+    locale: "ja_JP",
+    type: "website",
+    images: [
+      { url: "/og.png", width: 1200, height: 630, alt: "MOTH & FLAME — DRAW A CIRCLE" },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({
