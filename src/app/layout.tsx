@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     type: "website",
     images: [
-      { url: "/og.png", width: 1200, height: 630, alt: "MOTH & FLAME — DRAW A CIRCLE" },
+      { url: "/og.png", width: 1200, height: 630, alt: "MOTH & FLAME — 飛んで火に入る虫" },
     ],
   },
   twitter: {
