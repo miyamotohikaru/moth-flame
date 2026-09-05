@@ -15,6 +15,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://moth-flame.kosukuma.com"),
   title: TITLE,
   description: DESCRIPTION,
+  // ?x=6 のようにクエリを付けて配っても、素のURLと同じ1ページとして扱われるように
+  alternates: { canonical: "https://moth-flame.kosukuma.com" },
   // 共有したときに出る絵。実際のゲーム画面を撮ったもので、
   // 焼き直しは node tools/shoot-og.mjs（版下は tools/og.html）。
   openGraph: {
