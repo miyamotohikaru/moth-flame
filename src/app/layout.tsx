@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { OG_VERSION } from "./og-version";
+
+// 絵を焼き直すと OG_VERSION が変わり、SNS が持っている古い絵を捨てて取り直す
+const OG_IMAGE = `/og.png?v=${OG_VERSION}`;
 
 const TITLE = "Moth Flame — FLAME.EXE";
 const DESCRIPTION =
@@ -19,14 +23,14 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     type: "website",
     images: [
-      { url: "/og.png", width: 1200, height: 630, alt: "MOTH & FLAME — 飛んで火に入る虫" },
+      { url: OG_IMAGE, width: 1200, height: 630, alt: "MOTH & FLAME — 飛んで火に入る虫" },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    images: ["/og.png"],
+    images: [OG_IMAGE],
   },
 };
 
