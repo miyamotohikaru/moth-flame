@@ -6,6 +6,8 @@ import { OG_VERSION } from "./og-version";
 const OG_IMAGE = `/og.png?v=${OG_VERSION}`;
 
 const TITLE = "Moth Flame — FLAME.EXE";
+// SNSに貼ったときの見出し。サムネの絵と同じ言葉にする
+const SHARE_TITLE = "飛んで火に入る虫";
 const DESCRIPTION =
   "ドット絵の焚き火の周りを蛾になって飛び回れ。完璧な円を描いてスコアを競おう。";
 
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
   // 共有したときに出る絵。実際のゲーム画面を撮ったもので、
   // 焼き直しは node tools/shoot-og.mjs（版下は tools/og.html）。
   openGraph: {
-    title: TITLE,
+    title: SHARE_TITLE,
     description: DESCRIPTION,
     url: "https://moth-flame.kosukuma.com",
     siteName: "Moth Flame",
@@ -28,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: TITLE,
+    title: SHARE_TITLE,
     description: DESCRIPTION,
     images: [OG_IMAGE],
   },
