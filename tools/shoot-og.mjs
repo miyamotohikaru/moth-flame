@@ -11,7 +11,8 @@
  *   npm run dev の後に node tools/shoot-og.mjs http://localhost:3000
  * 文字や配置を直したいときは tools/og.html を触ってから焼き直す。
  */
-import { mkdtemp, rm } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -110,6 +111,19 @@ try {
   const out = path.join(ROOT, "public/og.png");
   await (await og.$("#og")).screenshot({ path: out });
   console.log(out);
+
+  // 絵の中身から版番号を作って書き出す。
+  // X などは og:image の URL 単位で画像を覚えているので、
+  // ファイル名が同じままだと焼き直しても古い絵が出続ける。
+  // ここが変われば URL が変わり、新しい絵を取りに来てくれる。
+  const version = createHash("sha256").update(await readFile(out)).digest("hex").slice(0, 8);
+  const vfile = path.join(ROOT, "src/app/og-version.ts");
+  await writeFile(
+    vfile,
+    `// tools/shoot-og.mjs が og.png を焼くたびに書き換える。手で触らない。\nexport const OG_VERSION = "${version}";\n`,
+    "utf8"
+  );
+  console.log(`${vfile} (${version})`);
 } finally {
   await browser.close();
   await rm(tmp, { recursive: true, force: true });
